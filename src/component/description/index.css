@@ -1,0 +1,9 @@
+.description {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.description__text {
+	line-height: 1.5em
+}

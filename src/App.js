@@ -1,3 +1,17 @@
+import Page from "./component/page";
+import Header from "./component/header";
+import Title from "./component/title";
+import Photo from "./component/photo";
+import Price from "./component/price";
+import RoomList from "./component/room-list";
+import Description from "./component/description";
+import Details from "./component/details";
+import Amenities from "./component/amenities";
+import Additions from "./component/additions";
+import Attractions from "./component/attractions";
+import ReviewsList from "./component/reviews-list";
+import Contacts from "./component/contacts";
+
 function App() {
   const data = {
     listing_name: "Іст-Сайд Біл",
@@ -124,27 +138,65 @@ function App() {
       {
         id: 453,
         name: "Crystal Clear Beach",
-        link: "www.test.com",
+        link: "https://www.google.com",
       },
       {
         id: 741,
         name: "Tropical Rainforest Hiking Trails",
-        link: "www.test.com",
+        link: "https://www.google.com",
       },
       {
         id: 422,
         name: "Island Waterfalls",
-        link: "www.test.com",
+        link: "https://www.google.com",
       },
       {
         id: 876,
         name: "Cultural Village Tours",
-        link: "www.test.com",
+        link: "https://www.google.com",
       },
     ],
   };
 
-  return <div>Hello World</div>;
+  return (
+    <Page>
+      <Header />
+      <Title
+        title={data.listing_name}
+        rating={data.reviews_summary.average_rating}
+        review={data.reviews_summary.total_reviews}
+        city={data.location.city}
+        country={data.location.country}
+        superhost={data.superhost}
+      />
+      <Photo src={data.image} name={data.listing_name} />
+      <Price
+        price={data.price.original_price}
+        discount={data.price.discounted_price}
+        currency={data.price.currency}
+        cleaning={data.price.cleaning_fee}
+        service={data.price.service_fee}
+        checkin={data.availability.checkin_date}
+        checkout={data.availability.checkout_date}
+      />
+      <RoomList list={data.roomTypes} />
+      <Description title="Опис" children={data.description} />
+      <Details {...data.property_details} />
+      <Description title="Про сусідів" children={data.neighborhood_info} />
+      <Amenities {...data.amenities} />
+      <Contacts {...data.contact_info} />
+      <Additions
+        rules={data.additional_properties.house_rules}
+        cancellation={data.additional_properties.cancellation_policy}
+        transportation={data.additional_properties.local_transportation}
+        languages={data.additional_properties.host_languages}
+        offers={data.additional_properties.special_offers}
+        instructions={data.additional_properties["check-in_instructions"]}
+      />
+      <ReviewsList list={data.guestReviews} />
+      <Attractions list={data.nearbyAttractions} />
+    </Page>
+  );
 }
 
 export default App;
